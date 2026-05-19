@@ -1,0 +1,37 @@
+function shellSort(arr) {
+  const n = arr.length;
+
+  // gap を半分ずつ減らしていく
+  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+
+    // gap 以降の要素を順番に見る
+    for (let right = gap; right < n; right++) {
+
+      // 今挿入したい値
+      const key = arr[right];
+
+      // 比較用インデックス
+      let left = right;
+
+      /*
+        gap 個左の要素と比較して、
+        key の方が小さければ後ろへずらす
+      */
+      while (left >= gap && key < arr[left - gap]) {
+        arr[left] = arr[left - gap];
+        left -= gap;
+      }
+
+      // 正しい位置へ挿入
+      arr[left] = key;
+    }
+  }
+
+  return arr;
+}
+
+
+// 使用例
+const nums = [9, 5, 1, 8, 3, 7, 4, 6, 2];
+
+console.log(shellSort(nums));
